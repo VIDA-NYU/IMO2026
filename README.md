@@ -10,6 +10,11 @@ prover for Lean 4, developed by [Axiom Math](https://axiommath.ai/).
 This repository contains the formal Lean 4 statements and solutions for all six
 problems of the competition.
 
+This clone also contains companion informal proofs and notes exploring the
+tradeoffs between informal mathematical exposition and exact formal
+verification. These companion materials are described below and are separate
+from the original AxiomProver-generated Lean development.
+
 The official source of the problems is https://www.imo-official.org/problems/2026/.
 
 Each problem lives under `IMO2026/<code>/`:
@@ -19,12 +24,37 @@ Each problem lives under `IMO2026/<code>/`:
 
 ## Problems
 
-1. **2026 Q1**: [[statement]](IMO2026/Q1/problem.lean) [[solution]](IMO2026/Q1/solution.lean) (521 lines, 24 minutes).
-2. **2026 Q2**: [[statement]](IMO2026/Q2/problem.lean) [[solution]](IMO2026/Q2/solution.lean) (1224 lines, 360 minutes).
-3. **2026 Q3**: [[statement]](IMO2026/Q3/problem.lean) [[solution]](IMO2026/Q3/solution.lean) (4229 lines, 869 minutes).
-4. **2026 Q4**: [[statement]](IMO2026/Q4/problem.lean) [[solution]](IMO2026/Q4/solution.lean) (520 lines, 39 minutes).
-5. **2026 Q5**: [[statement]](IMO2026/Q5/problem.lean) [[solution]](IMO2026/Q5/solution.lean) (457 lines, 65 minutes).
-6. **2026 Q6**: [[statement]](IMO2026/Q6/problem.lean) [[solution]](IMO2026/Q6/solution.lean) (771 lines, 139 minutes).
+1. **2026 Q1**: [[statement]](IMO2026/Q1/problem.lean) [[formal solution]](IMO2026/Q1/solution.lean) [[informal proof]](Q1_informal_proof.md) (521 Lean lines, 24 minutes).
+2. **2026 Q2**: [[statement]](IMO2026/Q2/problem.lean) [[formal solution]](IMO2026/Q2/solution.lean) [[informal proof]](Q2_informal_proof.md) (1,224 Lean lines, 360 minutes).
+3. **2026 Q3**: [[statement]](IMO2026/Q3/problem.lean) [[formal solution]](IMO2026/Q3/solution.lean) [[informal proof]](Q3_informal_proof.md) (4,229 Lean lines, 869 minutes).
+4. **2026 Q4**: [[statement]](IMO2026/Q4/problem.lean) [[formal solution]](IMO2026/Q4/solution.lean) [[informal proof]](Q4_informal_proof.md) (520 Lean lines, 39 minutes).
+5. **2026 Q5**: [[statement]](IMO2026/Q5/problem.lean) [[formal solution]](IMO2026/Q5/solution.lean) [[informal proof]](Q5_informal_proof.md) (457 Lean lines, 65 minutes).
+6. **2026 Q6**: [[statement]](IMO2026/Q6/problem.lean) [[formal solution]](IMO2026/Q6/solution.lean) [[informal proof]](Q6_informal_proof.md) (771 Lean lines, 139 minutes).
+
+The listed times are AxiomProver proof-search and proof-construction times, not
+Lean checking times or informal-proof generation times.
+
+## Informal proofs and proof-cost discussion
+
+The six informal proofs were generated and iteratively revised by Meta's
+[Muse Spark](https://ai.meta.com/blog/introducing-muse-spark-msl/) through
+interactions with the repository author. [GPT-5.6](https://developers.openai.com/api/docs/guides/latest-model)
+was used as a separate judge of the drafts, helping identify gaps and passages
+that needed revision. This was a human-in-the-loop process rather than unaided
+human proof writing or a controlled model benchmark.
+
+GPT-5.6's model judgment should not be confused with formal verification. It
+provided a fallible review of the mathematical prose; Lean/AXLE mechanically
+checked the precise formal theorem statements and proofs. The Muse Spark model
+and Muse Code harness also worked well as a combined system in this first
+hands-on use, suggesting that the model, harness, and fit between them should
+be considered together when comparing proof workflows.
+
+See [From Informal Proofs to Human-Readable Formal Mathematics](formal_proof_discussion_notes.md)
+for the detailed comparison, including proof fidelity, source-size overhead,
+AxiomProver search time versus Lean elaboration time, modeling assumptions,
+assurance boundaries, maintenance costs, and suggested measurements for future
+experiments.
 
 ## Building
 
@@ -65,4 +95,3 @@ Q6: okay=True (passed)
 ```
 
 Results have also been validated locally using [Comparator](https://github.com/leanprover/comparator).
-
